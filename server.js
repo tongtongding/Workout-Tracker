@@ -18,14 +18,9 @@ mongoose.connect(process.env.MONGODB_URL || "mongodb://localhost/workout", {
   useFindAndModify: false
 });
 
-// const databaseUrl = "workout";
-// const collections = ["Cardio","Resistance"];
+require("./routes/api.js")(app);
+require("./routes/html.js")(app);
 
-// const db = mongojs(databaseUrl, collections);
-
-// db.on("error", error => {
-//   console.log("Database Error:", error);
-// });
 
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}!`);
