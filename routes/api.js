@@ -1,10 +1,10 @@
-const Workout = require("../models");
+const db = require("../models");
 
 module.exports = function(app){
 
     app.get("/api/workouts",async(req,res)=>{
        try {
-        const data = await Workout.find({});
+        const data = await db.Workout.find({});
         console.log(data);
         res.json(data);
 
@@ -16,7 +16,7 @@ module.exports = function(app){
 
     app.get("/api/workouts/range",async(req,res)=>{
         try {
-         const data = await Workout.find({}).limit(7);
+         const data = await db.Workout.find({}).limit(7);
          res.json(data);
  
         } catch (error) {
@@ -27,7 +27,7 @@ module.exports = function(app){
 
     app.put("/api/workouts/:id", async(req,res)=>{
         try {
-            const data = await Workout.findByIdUpdate(req.params.id, {$push: { exercises: req.body}});
+            const data = await db.Workout.findByIdAndUpdate(req.params.id, {$push: { exercises: req.body}});
             res.json(data);
         } catch (error) {
             console.log(error);
@@ -37,7 +37,8 @@ module.exports = function(app){
 
     app.post("/api/workouts",async(req,res)=>{
         try {
-         const data = await Workout.create({});
+         const data = await db.Workout.create({});
+         console.log(data);
          res.json(data);
  
         } catch (error) {
